@@ -1,0 +1,60 @@
+$c_dark: #769656;
+$c_light: #eeeed2;
+$c_selected: #baca44;
+
+.chess-cell {
+    $root: &;
+
+    position: relative;
+    width: (100% / 8);
+    padding-top: (100% / 8);
+    height: 0;
+    cursor: pointer;
+    &:before,
+    &:after {
+        line-height: 1;
+        font-weight: 400;
+        @include responsive-type(10px, 14px);
+        @include max-screen($r_mobile) {
+            @include responsive-type(8px, 16px);
+        }
+    }
+    &:nth-child(8n - 7) {
+        &:before {
+            position: absolute;
+            top: 50%;
+            left: .5em;
+            transform: translateY(-50%);
+            counter-increment: numberCounter;
+            content: counter(numberCounter);
+        }
+    }
+    &:nth-last-child(-n + 8) {
+        &:after {
+            position: absolute;
+            left: 50%;
+            bottom: .5em;
+            transform: translateX(-50%);
+            counter-increment: alphaCounter;
+            content: counter(alphaCounter, lower-alpha);
+        }
+    }
+    &_dark {
+        background-color: $c_dark;
+        color: $c_light;
+        &#{$root}_selected {
+            box-shadow: inset 0px 0px 10px 0px $c_dark;
+        }
+    }
+    &_light {
+        background-color: $c_light;
+        color: $c_dark;
+        &#{$root}_selected {
+            box-shadow: inset 0px 0px 10px 0px $c_light;
+        }
+    }
+    &_selected {
+        background-color: $c_selected;
+        color: $c_light;
+    }
+}

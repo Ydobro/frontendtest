@@ -1,0 +1,5 @@
+.chess-board {
+    display: flex;
+    flex-wrap: wrap;
+    counter-reset: alphaCounter numberCounter;
+}
